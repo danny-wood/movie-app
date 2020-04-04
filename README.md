@@ -1,4 +1,10 @@
+# Movie App
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Netlify Status
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/90a39017-7102-4429-9401-1957a1ebb132/deploy-status)](https://app.netlify.com/sites/tmdb-app/deploys)
 
 ## Available Scripts
 
