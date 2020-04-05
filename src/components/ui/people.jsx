@@ -1,13 +1,13 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
-const Home = () => {
+const People = () => {
   return (
     <Container>
       <Row>
         <Col>
           <section>
-            <h1>Home</h1>
+            <h1>People</h1>
             <p>Coming soon...</p>
           </section>
         </Col>
@@ -16,4 +16,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default People;

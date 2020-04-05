@@ -1,14 +1,22 @@
 import React from "react";
+import { Container, Row, Col } from "reactstrap";
 
-const Movie = () => {
+const Movies = () => {
   return (
-    <section>
-      <p>Movie Component</p>
-    </section>
+    <Container>
+      <Row>
+        <Col>
+          <section>
+            <h1>Movies</h1>
+            <p>Coming soon...</p>
+          </section>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default Movie;
+export default Movies;
 
 // class App extends Component {
 //     state = {

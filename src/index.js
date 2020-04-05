@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import "typeface-montserrat";
+import "bootstrap-4-grid/css/grid.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
