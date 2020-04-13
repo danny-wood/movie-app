@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Layout from "./components/ui/layout";
-import Home from "./components/ui/home";
-import Movies from "./components/ui/movies";
-import NotFound from "./components/ui/not-found";
-import TVShows from "./components/ui/tv-shows";
-import People from "./components/ui/people";
+import Layout from "./components/ui/Layout";
+import Home from "./components/page/Home";
+import Movies from "./components/page/Movies";
+import NotFound from "./components/page/NotFound";
+import TVShows from "./components/page/TVShows";
+import People from "./components/page/People";
 
 function App() {
   return (

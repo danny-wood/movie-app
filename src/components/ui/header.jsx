@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "./nav";
+import Nav from "./Nav";
 import styled from "styled-components";
 import vars from "../../styles/vars";
 import { Container, Row, Col } from "reactstrap";

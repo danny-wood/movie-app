@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
+import TrendingList from "../common/TrendingList";
 
 const Home = () => {
   return (
@@ -8,7 +9,7 @@ const Home = () => {
         <Col>
           <section>
             <h1>Home</h1>
-            <p>Coming soon...</p>
+            <TrendingList />
           </section>
         </Col>
       </Row>
