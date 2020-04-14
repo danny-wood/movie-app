@@ -1,5 +1,6 @@
 {
   "tmdbApiUrl": "https://api.themoviedb.org",
   "tmdbApiUrlV3": "https://api.themoviedb.org/3",
-  "tmdbApiUrlV4": "https://api.themoviedb.org/4"
+  "tmdbApiUrlV4": "https://api.themoviedb.org/4",
+  "baseImageUrl": "https://image.tmdb.org/t/p"
 }

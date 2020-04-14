@@ -2,6 +2,7 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
+import vars from "../../styles/vars";
 
 const Layout = ({ children }) => {
   return (
@@ -20,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
+    color: ${vars.grey_800};
   }
   
   main{
