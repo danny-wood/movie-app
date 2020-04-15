@@ -1,25 +1,16 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import TrendingList from "../common/TrendingList";
-import styled from "styled-components";
-import vars from "../../styles/vars";
+import HeroBanner from "../ui/HeroBanner";
 
 const Home = () => {
   return (
     <>
-      <HeroBanner>
-        <Container>
-          <Row>
-            <Col>
-              <h1>Welcome to Movie App</h1>
-              <p>
-                Millions of movies, TV shows and people to discover. Explore
-                now.
-              </p>
-            </Col>
-          </Row>
-        </Container>
-      </HeroBanner>
+      <HeroBanner
+        title="Welcome to Movie App"
+        subtext="Millions of movies, TV shows and people to discover. Explore
+                now."
+      />
       <Container>
         <Row>
           <Col>
@@ -35,22 +26,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const HeroBanner = styled.section`
-  background: ${vars.primaryGradient};
-  padding: 2rem 0;
-  text-align: center;
-  color: ${vars.white};
-
-  h1 {
-    margin: 0;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 900;
-  }
-
-  p {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-`;
