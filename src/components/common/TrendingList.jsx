@@ -5,6 +5,7 @@ import { getTrending } from "./../../services/trendingService";
 import vars from "../../styles/vars";
 import SkeletonRow from "./SkeletonRow";
 import { baseImageUrl } from "../../config.json";
+import { Link } from "react-router-dom";
 
 function TrendingList(props) {
   const [trendingList, setTrendingList] = useState([]);
@@ -16,7 +17,7 @@ function TrendingList(props) {
       setIsLoading(true);
       const response = await getTrending("movie", "week");
       setTrendingList(response.data.results);
-      setIsLoading(response.data && false);
+      setIsLoading(false);
     };
 
     getData();
@@ -28,7 +29,7 @@ function TrendingList(props) {
     <Row>
       {trendingList.slice(0, 6).map((trendingItem) => (
         <Col xs="12" md="2" className="mb-3" key={trendingItem.id}>
-          <TrendingItem>
+          <TrendingItem to={`/movie/${trendingItem.id}`}>
             {trendingItem.poster_path && (
               <img
                 src={`${baseImageUrl}/w500/${trendingItem.poster_path}`}
@@ -46,10 +47,11 @@ function TrendingList(props) {
 
 export default TrendingList;
 
-const TrendingItem = styled.div`
+const TrendingItem = styled(Link)`
   background: ${vars.grey_200};
   height: 100%;
   min-height: 304px;
+  display: block;
 
   span {
     display: block;

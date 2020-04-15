@@ -23,8 +23,8 @@ const Home = () => {
       <Container>
         <Row>
           <Col>
-            <section>
-              <h2 className="text-uppercase">Trending Movies</h2>
+            <section className="mt-4">
+              <h2>Trending Movies</h2>
               <TrendingList />
             </section>
           </Col>

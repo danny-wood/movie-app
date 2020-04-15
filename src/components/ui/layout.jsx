@@ -27,6 +27,20 @@ const GlobalStyle = createGlobalStyle`
   main{
     flex-grow: 1;
   }
+
+  h1,h2,h3{
+    margin-top: 0;
+    font-weight: 800;
+  }
+
+  a{
+    text-decoration: none;
+    color: ${vars.grey_800};
+  }
+
+  p{
+    margin-top: 0;
+  }
 `;
 
 const LayoutContainer = styled.div`
