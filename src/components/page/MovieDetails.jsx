@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { getMovie } from "../../services/movieService";
+import { getMovie } from "../../services/mediaService";
 import HeroBanner from "../ui/HeroBanner";
 import { baseImageUrl } from "../../config.json";
 import Loading from "../common/Loading";
 
 function MovieDetails(props) {
   const [movie, setMovie] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
-      console.log("Getting movie data...");
-      setIsLoading(true);
       const data = await getMovie(props.match.params.id);
       setMovie(data);
       setIsLoading(false);

@@ -1,18 +1,19 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
+import HeroBanner from "../ui/HeroBanner";
 
 const People = () => {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <section>
-            <h1>People</h1>
-            <p>Coming soon...</p>
-          </section>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <HeroBanner title="People" />
+      <Container className="mt-4">
+        <Row>
+          <Col>
+            <p>People...</p>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

@@ -38,11 +38,19 @@ const StyledHeroBanner = styled.section`
     text-transform: uppercase;
     font-size: 4rem;
     font-weight: 900;
+
+    @media (max-width: ${vars.screen_xs_max}) {
+      font-size: 3.3rem;
+    }
   }
 
   p {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
     margin-top: 1rem;
+
+    @media (max-width: ${vars.screen_xs_max}) {
+      font-size: 1.3rem;
+    }
   }
 `;
