@@ -7,12 +7,14 @@ import NotFound from "./components/page/NotFound";
 import TVShows from "./components/page/TVShows";
 import People from "./components/page/People";
 import MovieDetails from "./components/page/MovieDetails";
+import TVShowDetails from "./components/page/TVShowDetails";
 
 function App() {
   return (
     <Layout>
       <Switch>
         <Route path="/people" component={People} />
+        <Route path="/tv-show/:id" component={TVShowDetails} />
         <Route path="/tv-shows" component={TVShows} />
         <Route path="/movie/:id" component={MovieDetails} />
         <Route path="/movies" component={Movies} />

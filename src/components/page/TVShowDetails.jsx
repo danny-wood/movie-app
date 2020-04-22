@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { getMovie } from "../../services/mediaService";
+import { getTvShow } from "../../services/mediaService";
 import HeroBanner from "../ui/HeroBanner";
 import { baseImageUrl } from "../../config.json";
 import Loading from "../common/Loading";
 import imageSizeEnum from "../../enums/imageSizeEnum";
 
-function MovieDetails(props) {
-  const [movie, setMovie] = useState({});
+function TVShowDetails(props) {
+  const [tvShow, setTvShow] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getMovie(props.match.params.id);
-      setMovie(data);
+      const data = await getTvShow(props.match.params.id);
+      setTvShow(data);
       setIsLoading(false);
     };
 
@@ -22,13 +22,12 @@ function MovieDetails(props) {
 
   if (isLoading) return <Loading />;
 
-  const { backdrop_path: heroBanner } = movie;
+  const { backdrop_path: heroBanner } = tvShow;
 
   return (
     <>
       <HeroBanner
-        title={movie.title}
-        subtext={movie.tagline}
+        title={tvShow.name}
         image={
           heroBanner &&
           `${baseImageUrl}/${imageSizeEnum.Backdrop.w1280}/${heroBanner}`
@@ -36,25 +35,25 @@ function MovieDetails(props) {
       />
       <Container className="mt-4">
         <Row>
-          {movie.poster_path && (
+          {tvShow.poster_path && (
             <Col xs="12" sm="auto">
               <img
-                src={`${baseImageUrl}/${imageSizeEnum.Poster.w185}/${movie.poster_path}`}
-                alt={movie.title}
+                src={`${baseImageUrl}/${imageSizeEnum.Poster.w185}/${tvShow.poster_path}`}
+                alt={tvShow.name}
                 style={{ maxWidth: "100%" }}
               />
             </Col>
           )}
           <Col>
             <h2>Overview</h2>
-            <p>{movie.overview}</p>
+            <p>{tvShow.overview}</p>
           </Col>
           <Col xs="12" sm="3">
             <p>
-              <strong>Status:</strong> {movie.status}
+              <strong>First Air Date:</strong> {tvShow.first_air_date}
             </p>
             <p>
-              <strong>Runtime:</strong> {movie.runtime}min
+              <strong>Episode Runtime:</strong> {tvShow.episode_run_time}min
             </p>
           </Col>
         </Row>
@@ -63,4 +62,4 @@ function MovieDetails(props) {
   );
 }
 
-export default MovieDetails;
+export default TVShowDetails;

@@ -3,6 +3,7 @@ import { tmdbApiUrlV3 } from "../config.json";
 
 const apiMovieUrl = `${tmdbApiUrlV3}/movie`;
 const apiDiscoverUrl = `${tmdbApiUrlV3}/discover`;
+const apiTvUrl = `${tmdbApiUrlV3}/tv`;
 
 // https://developers.themoviedb.org/3/movies/get-movie-details
 export async function getMovie(id) {
@@ -17,6 +18,11 @@ export async function getMovies() {
   return response.data;
 }
 
+export async function getTvShow(id) {
+  const response = await http.get(`${apiTvUrl}/${id}`);
+  return response.data;
+}
+
 export async function getTVShows() {
   const response = await http.get(`${apiDiscoverUrl}/tv`);
   return response.data;
@@ -25,5 +31,6 @@ export async function getTVShows() {
 export default {
   getMovie,
   getMovies,
+  getTvShow,
   getTVShows,
 };

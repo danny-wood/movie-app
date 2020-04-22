@@ -3,6 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import HeroBanner from "../ui/HeroBanner";
 import MediaList from "./../common/MediaList";
 import { getTVShows } from "../../services/mediaService";
+import mediaTypeEnum from "../../enums/mediaTypeEnum";
 
 const TVShows = () => {
   const [tvShows, setTvShows] = useState([]);
@@ -24,7 +25,11 @@ const TVShows = () => {
       <Container className="mt-4">
         <Row>
           <Col>
-            <MediaList data={tvShows} isLoading={tvShowsLoading} />
+            <MediaList
+              data={tvShows}
+              isLoading={tvShowsLoading}
+              mediaType={mediaTypeEnum.TVShow}
+            />
           </Col>
         </Row>
       </Container>
