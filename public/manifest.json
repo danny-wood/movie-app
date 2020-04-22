@@ -3,11 +3,6 @@
   "name": "Movie App",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png?v=ngJ4aQYqeo",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
       "src": "/android-chrome-512x512.png?v=ngJ4aQYqeo",
       "sizes": "512x512",
       "type": "image/png"
