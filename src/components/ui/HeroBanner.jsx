@@ -40,7 +40,7 @@ const StyledHeroBanner = styled.section`
     font-weight: 900;
 
     @media (max-width: ${vars.screen_xs_max}) {
-      font-size: 3.3rem;
+      font-size: 2.7rem;
     }
   }
 
@@ -50,7 +50,7 @@ const StyledHeroBanner = styled.section`
     margin-top: 1rem;
 
     @media (max-width: ${vars.screen_xs_max}) {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
   }
 `;

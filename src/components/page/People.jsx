@@ -9,7 +9,7 @@ const People = () => {
       <Container className="mt-4">
         <Row>
           <Col>
-            <p>People...</p>
+            <p className="text-center">Coming Soon...</p>
           </Col>
         </Row>
       </Container>

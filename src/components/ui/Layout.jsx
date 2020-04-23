@@ -22,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     color: ${vars.grey_800};
+
+    @media (max-width: ${vars.screen_xs_max}) {
+      padding-bottom: 57px;
+    } 
   }
   
   main{

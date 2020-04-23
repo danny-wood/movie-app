@@ -13,20 +13,26 @@ function MediaList({ isLoading, data, mediaType = MediaTypeEnum.Movie }) {
 
   return (
     <Row>
-      {data.map((item) => (
-        <StyledCol xs="12" md="auto" className="mb-3" key={item.id}>
-          <StyledItem to={`/${mediaType}/${item.id}`}>
-            {item.poster_path && (
+      {data.map((item) => {
+        console.log(`${item.title || item.nam} - ${item.poster_path}`);
+        const imgSrc = item.poster_path
+          ? `${baseImageUrl}/${imageSizeEnum.Poster.w500}/${item.poster_path}`
+          : "https://placehold.it/500x750/e2e8f0/a0aec0?text=NO%20IMAGE";
+
+        return (
+          <StyledCol xs="12" md="auto" className="mb-3" key={item.id}>
+            <StyledItem to={`/${mediaType}/${item.id}`}>
               <img
-                src={`${baseImageUrl}/${imageSizeEnum.Poster.w500}/${item.poster_path}`}
+                src={imgSrc}
                 alt={item.title || item.name}
                 style={{ maxWidth: "100%" }}
               />
-            )}
-            <span>{item.title || item.name}</span>
-          </StyledItem>
-        </StyledCol>
-      ))}
+
+              <span>{item.title || item.name}</span>
+            </StyledItem>
+          </StyledCol>
+        );
+      })}
     </Row>
   );
 }

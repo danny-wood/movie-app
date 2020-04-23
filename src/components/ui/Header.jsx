@@ -10,8 +10,13 @@ const Header = () => {
     <StyledHeader>
       <Container>
         <Row className="align-items-center">
-          <Col xs="auto">
-            <StyledLogo to="/">MOVIE APP</StyledLogo>
+          <Col xs="12" sm="auto" className="text-center">
+            <StyledLogo to="/">
+              <img
+                src={require("../../assets/svg/movie-app-logo.svg")}
+                alt="Movie App"
+              />
+            </StyledLogo>
           </Col>
           <Col>
             <Nav />
@@ -27,7 +32,7 @@ export default Header;
 const StyledHeader = styled.header`
   color: ${vars.white};
   background: ${vars.grey_800};
-  padding: 1.2rem 0;
+  padding: 0.8rem 0;
 `;
 
 const StyledLogo = styled(Link)`
@@ -39,4 +44,12 @@ const StyledLogo = styled(Link)`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+
+  img {
+    width: 45px;
+    height: 37px;
+  }
 `;
