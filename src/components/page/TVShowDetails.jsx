@@ -36,7 +36,7 @@ function TVShowDetails(props) {
       <Container className="mt-4">
         <Row>
           {tvShow.poster_path && (
-            <Col xs="12" sm="auto">
+            <Col xs="12" sm="auto" className="d-none d-md-block">
               <img
                 src={`${baseImageUrl}/${imageSizeEnum.Poster.w185}/${tvShow.poster_path}`}
                 alt={tvShow.name}
@@ -45,7 +45,7 @@ function TVShowDetails(props) {
             </Col>
           )}
           <Col>
-            <h2>Overview</h2>
+            <h2 className="mb-3">Overview</h2>
             <p>{tvShow.overview}</p>
           </Col>
           <Col xs="12" sm="3">

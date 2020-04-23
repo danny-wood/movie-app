@@ -37,7 +37,7 @@ function MovieDetails(props) {
       <Container className="mt-4">
         <Row>
           {movie.poster_path && (
-            <Col xs="12" sm="auto">
+            <Col xs="12" sm="auto" className="d-none d-md-block">
               <img
                 src={`${baseImageUrl}/${imageSizeEnum.Poster.w185}/${movie.poster_path}`}
                 alt={movie.title}
@@ -46,7 +46,7 @@ function MovieDetails(props) {
             </Col>
           )}
           <Col>
-            <h2>Overview</h2>
+            <h2 className="mb-3">Overview</h2>
             <p>{movie.overview}</p>
           </Col>
           <Col xs="12" sm="3">
