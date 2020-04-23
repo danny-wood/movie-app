@@ -8,10 +8,12 @@ import TVShows from "./components/page/TVShows";
 import People from "./components/page/People";
 import MovieDetails from "./components/page/MovieDetails";
 import TVShowDetails from "./components/page/TVShowDetails";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 function App() {
   return (
     <Layout>
+      <ScrollToTop />
       <Switch>
         <Route path="/people" component={People} />
         <Route path="/tv-show/:id" component={TVShowDetails} />
