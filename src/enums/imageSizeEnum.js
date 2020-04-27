@@ -17,7 +17,15 @@ const Poster = Object.freeze({
   original: "original",
 });
 
+const Profile = Object.freeze({
+  w45: "w45",
+  w185: "w185",
+  h632: "h632",
+  original: "original",
+});
+
 export default {
   Backdrop,
   Poster,
+  Profile,
 };
