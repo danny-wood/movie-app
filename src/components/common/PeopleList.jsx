@@ -19,8 +19,7 @@ function PeopleList({ isLoading, data }) {
 
         return (
           <StyledCol xs="12" md="auto" className="mb-3" key={item.id}>
-            {/* <StyledItem to={`/people/${item.id}`}> */}
-            <StyledItem to={`/people`}>
+            <StyledItem to={`/people/${item.id}`}>
               <img src={imgSrc} alt={item.name} style={{ maxWidth: "100%" }} />
               <span>{item.name}</span>
             </StyledItem>

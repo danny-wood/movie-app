@@ -5,6 +5,7 @@ import HeroBanner from "../ui/HeroBanner";
 import { baseImageUrl } from "../../config.json";
 import Loading from "../common/Loading";
 import imageSizeEnum from "../../enums/imageSizeEnum";
+import Button from "./../common/Button";
 
 function MovieDetails(props) {
   const [movie, setMovie] = useState({});
@@ -42,6 +43,7 @@ function MovieDetails(props) {
                 src={`${baseImageUrl}/${imageSizeEnum.Poster.w185}/${movie.poster_path}`}
                 alt={movie.title}
                 style={{ maxWidth: "100%" }}
+                className="mb-3"
               />
             </Col>
           )}
@@ -50,12 +52,21 @@ function MovieDetails(props) {
             <p>{movie.overview}</p>
           </Col>
           <Col xs="12" sm="3">
-            <p>
-              <strong>Status:</strong> {movie.status}
-            </p>
-            <p>
-              <strong>Runtime:</strong> {movie.runtime}min
-            </p>
+            {movie.status && (
+              <p>
+                <strong>Status:</strong> {movie.status}
+              </p>
+            )}
+            {movie.runtime > 0 && (
+              <p>
+                <strong>Runtime:</strong> {movie.runtime}min
+              </p>
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button to="/movies">Back</Button>
           </Col>
         </Row>
       </Container>
