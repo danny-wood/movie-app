@@ -22,9 +22,9 @@ const Header = () => {
           <Col>
             <Nav />
           </Col>
-          {/* <Col sm="auto">
+          <Col sm="auto">
             <Search />
-          </Col> */}
+          </Col>
         </Row>
       </Container>
     </StyledHeader>
