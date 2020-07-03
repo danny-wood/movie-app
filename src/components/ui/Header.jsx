@@ -4,6 +4,7 @@ import styled from "styled-components";
 import vars from "../../styles/vars";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 const Header = () => {
   return (
@@ -21,6 +22,9 @@ const Header = () => {
           <Col>
             <Nav />
           </Col>
+          {/* <Col sm="auto">
+            <Search />
+          </Col> */}
         </Row>
       </Container>
     </StyledHeader>

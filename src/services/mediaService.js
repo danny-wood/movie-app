@@ -18,6 +18,11 @@ export async function getMovies() {
   return response.data;
 }
 
+export async function getUpcomingMovies() {
+  const response = await http.get(`${apiMovieUrl}/upcoming`);
+  return response.data;
+}
+
 export async function getTvShow(id) {
   const response = await http.get(`${apiTvUrl}/${id}`);
   return response.data;
@@ -31,6 +36,7 @@ export async function getTVShows() {
 export default {
   getMovie,
   getMovies,
+  getUpcomingMovies,
   getTvShow,
   getTVShows,
 };

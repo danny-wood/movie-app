@@ -17,6 +17,12 @@ const grey_700 = "#4a5568";
 const grey_800 = "#2d3748";
 const grey_900 = "#1a202c";
 
+const blackTransparent = (transparency = "0.5") =>
+  `rgba(0, 0, 0, ${transparency})`;
+
+const whiteTransparent = (transparency = "0.5") =>
+  `rgba(255, 255, 255, ${transparency})`;
+
 // Gradients
 const primaryGradient = `linear-gradient(90deg, ${primary}, ${secondary});`;
 const multiLinearGradient =
@@ -51,6 +57,9 @@ export default {
   grey_700,
   grey_800,
   grey_900,
+
+  blackTransparent,
+  whiteTransparent,
 
   // Export Gradients
   primaryGradient,
