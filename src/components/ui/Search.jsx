@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Row, Col } from "reactstrap";
 import { MdSearch } from "react-icons/md";
 import styled from "styled-components";
+import _ from "lodash";
 import vars from "../../styles/vars";
 import { multiSearch } from "../../services/searchService";
 
@@ -15,13 +16,27 @@ function Search(props) {
     console.log("Search Result", result);
   };
 
+  const fakeApiCall = (q) => {
+    console.log("API CALL... ", +q);
+  };
+
+  const delayedQuery = useCallback(
+    _.debounce((q) => fakeApiCall(q), 500),
+    []
+  );
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+    delayedQuery(e.target.value);
+  };
+
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <Row className="align-items-center">
         <Col>
           <StyledSearchTextInput
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => handleSearch(e)}
           />
         </Col>
         <Col>
