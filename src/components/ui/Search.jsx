@@ -5,38 +5,56 @@ import styled from "styled-components";
 import _ from "lodash";
 import vars from "../../styles/vars";
 import { multiSearch } from "../../services/searchService";
+import { Link } from "react-router-dom";
 
-function Search(props) {
+const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const result = await multiSearch(searchTerm);
-    console.log("Search Result", result);
-  };
-
-  const fakeApiCall = (q) => {
-    console.log("API CALL... ", +q);
+  const sendQuery = async (searchTerm) => {
+    if (searchTerm) {
+      console.log(`Searching for ${searchTerm}`);
+      const response = await multiSearch(searchTerm);
+      console.log("Search Result", response);
+      setSearchResults(response.results);
+    } else {
+      setSearchResults([]);
+    }
   };
 
   const delayedQuery = useCallback(
-    _.debounce((q) => fakeApiCall(q), 500),
+    _.debounce((value) => sendQuery(value), 500),
     []
   );
 
-  const handleSearch = (e) => {
+  const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
     delayedQuery(e.target.value);
   };
 
+  const resetSearch = () => {
+    setSearchTerm("");
+    setSearchResults([]);
+  };
+
+  const parseUrl = (mediaType, id) => {
+    switch (mediaType) {
+      case "tv":
+        return `/tv-show/${id}`;
+      case "people":
+        return `/people/${id}`;
+      default:
+        return `/movie/${id}`;
+    }
+  };
+
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <StyledForm>
       <Row className="align-items-center">
         <Col>
           <StyledSearchTextInput
             value={searchTerm}
-            onChange={(e) => handleSearch(e)}
+            onChange={handleSearchChange}
           />
         </Col>
         <Col>
@@ -45,11 +63,24 @@ function Search(props) {
           </StyledSearchButton>
         </Col>
       </Row>
-    </form>
+      <StyledAutoComplete>
+        {searchResults.map((item) => (
+          <div key={item.id}>
+            <Link to={parseUrl(item.media_type, item.id)} onClick={resetSearch}>
+              {item.title || item.name}
+            </Link>
+          </div>
+        ))}
+      </StyledAutoComplete>
+    </StyledForm>
   );
-}
+};
 
 export default Search;
+
+const StyledForm = styled.form`
+  position: relative;
+`;
 
 const StyledSearchTextInput = styled.input`
   display: inline-block;
@@ -73,5 +104,18 @@ const StyledSearchButton = styled.button`
 
   &:hover {
     background: ${vars.whiteTransparent("0.3")};
+  }
+`;
+
+const StyledAutoComplete = styled.div`
+  background: ${vars.white};
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 20;
+  div {
+    padding: 5px;
+    border-bottom: 1px solid ${vars.grey_500};
+    color: ${vars.grey_700};
   }
 `;
