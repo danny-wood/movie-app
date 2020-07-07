@@ -19,7 +19,7 @@ function TVShowDetails(props) {
     };
 
     getData();
-  }, []);
+  }, [props.match.params.id]);
 
   if (isLoading) return <Loading />;
 

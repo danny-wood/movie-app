@@ -1,22 +1,23 @@
-import React, { useState, useCallback } from "react";
-import { Row, Col } from "reactstrap";
+import React, { useState, useCallback, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import styled from "styled-components";
 import _ from "lodash";
 import vars from "../../styles/vars";
 import { multiSearch } from "../../services/searchService";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import MediaTypeBadge from "../common/MediaTypeBadge";
 
 const Search = () => {
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const history = useHistory();
+  const searchInput = useRef();
 
   const sendQuery = async (searchTerm) => {
     if (searchTerm) {
-      console.log(`Searching for ${searchTerm}`);
       const response = await multiSearch(searchTerm);
-      console.log("Search Result", response);
-      setSearchResults(response.results);
+      setSearchResults(response.results?.slice(0, 5));
     } else {
       setSearchResults([]);
     }
@@ -32,16 +33,25 @@ const Search = () => {
     delayedQuery(e.target.value);
   };
 
-  const resetSearch = () => {
+  const handleSearchClick = (e, mediaType, id) => {
+    e.preventDefault();
     setSearchTerm("");
     setSearchResults([]);
+    setIsSearchVisible(false);
+    history.push(parseUrl(mediaType, id));
+  };
+
+  const handleShowSearch = (e) => {
+    e.preventDefault();
+    setIsSearchVisible(!isSearchVisible);
+    searchInput.current && searchInput.current.focus();
   };
 
   const parseUrl = (mediaType, id) => {
     switch (mediaType) {
       case "tv":
         return `/tv-show/${id}`;
-      case "people":
+      case "person":
         return `/people/${id}`;
       default:
         return `/movie/${id}`;
@@ -49,47 +59,62 @@ const Search = () => {
   };
 
   return (
-    <StyledForm>
-      <Row className="align-items-center">
-        <Col>
-          <StyledSearchTextInput
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-        </Col>
-        <Col>
-          <StyledSearchButton>
-            <MdSearch />
-          </StyledSearchButton>
-        </Col>
-      </Row>
+    <StyledSearhFormGroup>
+      <StyledSearchTextInput
+        isSearchVisible={isSearchVisible}
+        value={searchTerm}
+        onChange={handleSearchChange}
+        ref={searchInput}
+      />
+      <StyledSearchButton
+        isSearchVisible={isSearchVisible}
+        onClick={handleShowSearch}
+      >
+        <MdSearch />
+      </StyledSearchButton>
       <StyledAutoComplete>
         {searchResults.map((item) => (
           <div key={item.id}>
-            <Link to={parseUrl(item.media_type, item.id)} onClick={resetSearch}>
+            <a
+              href="/"
+              onClick={(e) => handleSearchClick(e, item.media_type, item.id)}
+            >
               {item.title || item.name}
-            </Link>
+              <MediaTypeBadge mediaType={item.media_type} />
+            </a>
           </div>
         ))}
       </StyledAutoComplete>
-    </StyledForm>
+    </StyledSearhFormGroup>
   );
 };
 
 export default Search;
 
-const StyledForm = styled.form`
+const StyledSearhFormGroup = styled.form`
   position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: inline-block;
 `;
 
 const StyledSearchTextInput = styled.input`
   display: inline-block;
   height: 35px;
+  border: 1px solid ${vars.white};
+  outline: none;
+  padding-left: 10px;
+  padding-right: 50px;
+  font-family: ${vars.primaryFont};
+  margin-top: 5px;
+  transition: ease-in-out 300ms;
+  width: ${(props) => (props.isSearchVisible ? "100%" : 0)};
+  opacity: ${(props) => (props.isSearchVisible ? 1 : 0)};
 `;
 
 const StyledSearchButton = styled.button`
   background: none;
-  color: inherit;
+  color: ${(props) => (props.isSearchVisible ? vars.primary : vars.white)};
   border: none;
   padding: 8px;
   font: inherit;
@@ -101,9 +126,13 @@ const StyledSearchButton = styled.button`
   border-radius: 50%;
   transition: ease-in-out 200ms;
   background: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
 
   &:hover {
-    background: ${vars.whiteTransparent("0.3")};
+    background: ${(props) =>
+      props.isSearchVisible ? "transparent" : vars.whiteTransparent("0.3")};
   }
 `;
 
@@ -113,9 +142,25 @@ const StyledAutoComplete = styled.div`
   top: 40px;
   left: 0;
   z-index: 20;
+  width: 100%;
+  text-align: left;
+
   div {
-    padding: 5px;
-    border-bottom: 1px solid ${vars.grey_500};
+    border-bottom: 1px solid ${vars.grey_300};
     color: ${vars.grey_700};
+  }
+
+  span {
+    float: right;
+  }
+
+  a {
+    padding: 10px 15px;
+    display: block;
+    font-size: 0.9rem;
+
+    &:hover {
+      color: ${vars.primary};
+    }
   }
 `;

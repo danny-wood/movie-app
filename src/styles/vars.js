@@ -3,6 +3,9 @@ const black = "#000000";
 const white = "#ffffff";
 const pink = "#ff0088";
 const purple = "#dd00ee";
+const green = "#85de8d";
+const orange = "#dba15a";
+const blue = "#63b1ff";
 
 const primary = pink;
 const secondary = purple;
@@ -38,12 +41,18 @@ const screen_lg_min = "992px";
 const screen_lg_max = "1199px";
 const screen_xl_min = "1200px";
 
+// Fonts
+const primaryFont = `"Montserrat", sans-serif`;
+
 export default {
   // Export Colours
   black,
   white,
   pink,
   purple,
+  green,
+  orange,
+  blue,
 
   primary,
   secondary,
@@ -74,4 +83,7 @@ export default {
   screen_lg_min,
   screen_lg_max,
   screen_xl_min,
+
+  // Fonts
+  primaryFont,
 };

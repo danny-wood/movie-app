@@ -19,10 +19,10 @@ const Header = () => {
               />
             </StyledLogo>
           </Col>
-          <Col>
+          <Col sm="auto">
             <Nav />
           </Col>
-          <Col sm="auto">
+          <Col className="text-right d-none d-lg-block">
             <Search />
           </Col>
         </Row>

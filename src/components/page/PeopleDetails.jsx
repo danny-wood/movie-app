@@ -21,7 +21,7 @@ function PeopleDetails(props) {
     };
 
     getData();
-  }, []);
+  }, [props.match.params.id]);
 
   if (isLoading) return <Loading />;
 
