@@ -10,12 +10,14 @@ import MovieDetails from "./components/page/MovieDetails";
 import TVShowDetails from "./components/page/TVShowDetails";
 import ScrollToTop from "./components/common/ScrollToTop";
 import PeopleDetails from "./components/page/PeopleDetails";
+import Dashboard from "./components/page/Dashboard";
 
 function App() {
   return (
     <Layout>
       <ScrollToTop />
       <Switch>
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/people/:id" component={PeopleDetails} />
         <Route path="/people" component={People} />
         <Route path="/tv-show/:id" component={TVShowDetails} />
