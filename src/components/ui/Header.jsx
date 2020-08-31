@@ -5,11 +5,9 @@ import vars from "../../styles/vars";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import Search from "./Search";
-import { useAuth } from "../../hooks/useAuth";
+import AccountNav from "./AccountNav";
 
 const Header = () => {
-  const { user } = useAuth();
-
   return (
     <StyledHeader>
       <Container>
@@ -25,10 +23,16 @@ const Header = () => {
           <Col sm="auto">
             <Nav />
           </Col>
-          <Col className="text-right d-none d-lg-block">
-            <Search />
+          <Col>
+            <Row noGutters className="align-items-center">
+              <Col className="text-right d-none d-lg-block">
+                <Search />
+              </Col>
+              <Col xs="auto">
+                <AccountNav />
+              </Col>
+            </Row>
           </Col>
-          {user && <Col xs="auto">{user.name}</Col>}
         </Row>
       </Container>
     </StyledHeader>

@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap-4-grid": "^3.4.0",
     "lodash": "^4.17.15",
+    "lodash-es": "^4.17.15",
     "material-table": "^1.66.0",
     "query-string": "^6.13.1",
     "react": "^16.13.1",

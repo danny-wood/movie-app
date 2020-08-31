@@ -19,7 +19,7 @@ function MovieDetails(props) {
       setIsLoading(false);
     };
 
-    // We need to be able to set loading to false if an error occurs.
+    //TODO We need to be able to set loading to false if an error occurs.
     catchError(getData());
   }, [props.match.params.id]);
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import queryString from "query-string";
 import { tmdbApiUrlV3 } from "../config.json";
 import httpService from "../services/httpService";
@@ -23,6 +23,7 @@ export const useAuth = () => {
 
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
+  const history = useHistory();
   const [user, setUser] = useState(null);
   const [sessionId, setSessionId] = useState(null);
 
@@ -47,6 +48,7 @@ function useProvideAuth() {
   };
 
   const approve = async (requestToken) => {
+    //TODO Move logic for getting query string from approve component to this function
     if (!requestToken) return console.error("No request token");
 
     const data = {
@@ -65,6 +67,9 @@ function useProvideAuth() {
       console.log("userResponse", userResponse.data);
       setUser(userResponse.data);
       localStorage.setItem("USER", JSON.stringify(userResponse.data));
+
+      //TODO handle if user denies access from TMDB account
+      history.push("/");
     }
   };
 
@@ -78,14 +83,19 @@ function useProvideAuth() {
   //       });
   //   };
 
-  //   const signout = () => {
-  //     return firebase
-  //       .auth()
-  //       .signOut()
-  //       .then(() => {
-  //         setUser(false);
-  //       });
-  //   };
+  const signout = () => {
+    localStorage.removeItem("USER");
+    localStorage.removeItem("SESSION_ID");
+    setUser(null);
+    setSessionId(null);
+
+    // return firebase
+    //   .auth()
+    //   .signOut()
+    //   .then(() => {
+    //     setUser(false);
+    //   });
+  };
 
   //   const sendPasswordResetEmail = (email) => {
   //     return firebase
@@ -132,11 +142,11 @@ function useProvideAuth() {
   // Return the user object and auth methods
   return {
     user,
+    sessionId,
     signin,
     approve,
-    sessionId,
+    signout,
     // signup,
-    // signout,
     // sendPasswordResetEmail,
     // confirmPasswordReset,
   };

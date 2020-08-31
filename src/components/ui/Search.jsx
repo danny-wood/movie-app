@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import styled from "styled-components";
-import _ from "lodash";
+import { debounce } from "lodash";
 import vars from "../../styles/vars";
 import { multiSearch } from "../../services/searchService";
 import { useHistory } from "react-router-dom";
 import MediaTypeBadge from "../common/MediaTypeBadge";
+import IconButton from "../common/IconButton";
 
 const Search = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -24,7 +25,7 @@ const Search = () => {
   };
 
   const delayedQuery = useCallback(
-    _.debounce((value) => sendQuery(value), 500),
+    debounce((value) => sendQuery(value), 500),
     []
   );
 
@@ -66,12 +67,13 @@ const Search = () => {
         onChange={handleSearchChange}
         ref={searchInput}
       />
-      <StyledSearchButton
-        isSearchVisible={isSearchVisible}
+      <IconButton
+        isActive={isSearchVisible}
+        isAbsolute={true}
         onClick={handleShowSearch}
       >
         <MdSearch />
-      </StyledSearchButton>
+      </IconButton>
       <StyledAutoComplete>
         {searchResults.map((item) => (
           <div key={item.id}>
@@ -110,30 +112,6 @@ const StyledSearchTextInput = styled.input`
   transition: ease-in-out 300ms;
   width: ${(props) => (props.isSearchVisible ? "100%" : 0)};
   opacity: ${(props) => (props.isSearchVisible ? 1 : 0)};
-`;
-
-const StyledSearchButton = styled.button`
-  background: none;
-  color: ${(props) => (props.isSearchVisible ? vars.primary : vars.white)};
-  border: none;
-  padding: 8px;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  font-size: 30px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  transition: ease-in-out 200ms;
-  background: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  &:hover {
-    background: ${(props) =>
-      props.isSearchVisible ? "transparent" : vars.whiteTransparent("0.3")};
-  }
 `;
 
 const StyledAutoComplete = styled.div`
