@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.movie_app.twa",
+      "package_name": "app.netlify.themovie_app.twa",
       "sha256_cert_fingerprints": [
-        "0E:11:1E:2F:79:1A:E7:5D:B7:97:BC:96:CB:49:5C:1C:0C:41:AE:32:27:ED:9F:69:E4:A5:2D:72:92:2D:B4:F3"
+        "65:F9:3A:00:CD:68:03:61:AD:45:F1:EA:26:33:12:6C:1D:01:1D:2B:99:32:49:37:C3:FD:39:07:5F:BE:03:97"
       ]
     }
   }
