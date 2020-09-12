@@ -32,19 +32,10 @@ function useProvideAuth() {
   const signin = async (username, password) => {
     const tokenResponse = await httpService.get(`${authApiUrl}/token/new`);
     const request_token = tokenResponse?.data?.request_token;
-    console.log("request token", request_token);
 
     if (request_token) {
       window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/approve`;
     }
-
-    // return firebase
-    //   .auth()
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then((response) => {
-    //     setUser(response.user);
-    //     return response.user;
-    //   });
   };
 
   const approve = async (requestToken) => {
