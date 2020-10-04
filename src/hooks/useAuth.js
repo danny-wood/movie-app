@@ -27,15 +27,12 @@ function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [sessionId, setSessionId] = useState(null);
 
-  // Wrap any Firebase methods we want to use making sure ...
-  // ... to save the user to state.
+  // Login function, we use TMDB to handle our user account data. When signing in the user is sent on to themoviedb.org,
+  // they then login to their account, approve or deny access for their account, then they are redirected back to this app.
   const signin = async (username, password) => {
     const tokenResponse = await httpService.get(`${authApiUrl}/token/new`);
     const request_token = tokenResponse?.data?.request_token;
-
-    if (request_token) {
-      window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/approve`;
-    }
+    window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/approve`;
   };
 
   const approve = async (requestToken) => {
@@ -64,29 +61,19 @@ function useProvideAuth() {
     }
   };
 
-  //   const signup = (email, password) => {
-  //     return firebase
-  //       .auth()
-  //       .createUserWithEmailAndPassword(email, password)
-  //       .then((response) => {
-  //         setUser(response.user);
-  //         return response.user;
-  //       });
-  //   };
-
+  // Clear local storage, redirect to homepage
   const signout = () => {
     localStorage.removeItem("USER");
     localStorage.removeItem("SESSION_ID");
     setUser(null);
     setSessionId(null);
-
-    // return firebase
-    //   .auth()
-    //   .signOut()
-    //   .then(() => {
-    //     setUser(false);
-    //   });
+    history.push("/");
   };
+
+  // const isAuthenticated = () => {
+  //   const storedUser = localStorage.getItem("USER");
+  //   return storedUser ? true : false;
+  // };
 
   //   const sendPasswordResetEmail = (email) => {
   //     return firebase
@@ -137,6 +124,7 @@ function useProvideAuth() {
     signin,
     approve,
     signout,
+    //isAuthenticated,
     // signup,
     // sendPasswordResetEmail,
     // confirmPasswordReset,

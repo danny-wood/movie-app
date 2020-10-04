@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { ProvideAuth } from "./hooks/useAuth";
+import PrivateRoute from "./components/common/PrivateRoute";
 import Layout from "./components/ui/Layout";
 import Home from "./components/page/Home";
 import Movies from "./components/page/Movies";
@@ -14,6 +15,7 @@ import PeopleDetails from "./components/page/PeopleDetails";
 import Dashboard from "./components/page/Dashboard";
 import Login from "./components/page/Login";
 import Approve from "./components/page/Approve";
+import Profile from "./components/page/Profile";
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
       <Layout>
         <ScrollToTop />
         <Switch>
+          <PrivateRoute path="/profile" component={Profile} />
           <Route path="/approve" component={Approve} />
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={Dashboard} />

@@ -2,11 +2,13 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import { MdPersonOutline } from "react-icons/md";
 import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import IconButton from "../common/IconButton";
 
 function AccountNav() {
   const { user, signout, signin } = useAuth();
+  const history = useHistory();
 
   if (!user)
     return (
@@ -17,8 +19,11 @@ function AccountNav() {
 
   return (
     <Row noGutters className="align-items-center">
+      <Col xs="auto" className="ml-2">
+        Hi {user.name}
+      </Col>
       <Col xs="auto mx-2">
-        <IconButton>
+        <IconButton onClick={() => history.push("/profile")} title="profile">
           <MdPersonOutline />
         </IconButton>
       </Col>
