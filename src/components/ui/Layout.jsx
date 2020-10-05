@@ -3,10 +3,17 @@ import styled, { createGlobalStyle } from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import vars from "../../styles/vars";
+import { Helmet } from "react-helmet";
 
 const Layout = ({ children }) => {
   return (
     <LayoutContainer>
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+      </Helmet>
       <GlobalStyle />
       <Header />
       <main>{children}</main>

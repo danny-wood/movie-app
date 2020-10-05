@@ -5,6 +5,7 @@ import vars from "../../styles/vars";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import AccountNav from "./AccountNav";
 
 const Header = () => {
   return (
@@ -22,8 +23,15 @@ const Header = () => {
           <Col sm="auto">
             <Nav />
           </Col>
-          <Col className="text-right d-none d-lg-block">
-            <Search />
+          <Col className="d-none d-lg-block">
+            <Row noGutters className="align-items-center">
+              <Col className="text-right">
+                <Search />
+              </Col>
+              <Col xs="auto">
+                <AccountNav />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

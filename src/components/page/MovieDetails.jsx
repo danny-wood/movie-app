@@ -6,6 +6,7 @@ import { baseImageUrl } from "../../config.json";
 import Loading from "../common/Loading";
 import imageSizeEnum from "../../enums/imageSizeEnum";
 import Button from "./../common/Button";
+import { catchError } from "./../../utils/errorUtil";
 
 function MovieDetails(props) {
   const [movie, setMovie] = useState({});
@@ -18,7 +19,8 @@ function MovieDetails(props) {
       setIsLoading(false);
     };
 
-    getData();
+    //TODO We need to be able to set loading to false if an error occurs.
+    catchError(getData());
   }, [props.match.params.id]);
 
   if (isLoading) return <Loading />;
