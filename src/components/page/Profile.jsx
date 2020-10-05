@@ -6,9 +6,12 @@ import styled from "styled-components";
 import vars from "../../styles/vars";
 
 function Profile() {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
 
   console.log("Rendering profile", user);
+  console.log(isAuthenticated ? "YES" : "NO");
+
+  if (!user) return null;
 
   return (
     <>
@@ -17,16 +20,16 @@ function Profile() {
         <Row>
           <Col xs="12" md="auto" className="mt-3">
             <StyledProfileImage
-              src={`https://www.gravatar.com/avatar/${user?.avatar.gravatar.hash}?s=200`}
+              src={`https://www.gravatar.com/avatar/${user.avatar.gravatar.hash}?s=200`}
               lazyload
             />
           </Col>
           <Col className="mt-3">
             <p>
-              <strong>Name:</strong> {user?.name}
+              <strong>Name:</strong> {user.name}
             </p>
             <p>
-              <strong>Username:</strong> {user?.username}
+              <strong>Username:</strong> {user.username}
             </p>
           </Col>
         </Row>

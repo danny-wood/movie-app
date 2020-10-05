@@ -23,9 +23,9 @@ const Header = () => {
           <Col sm="auto">
             <Nav />
           </Col>
-          <Col>
+          <Col className="d-none d-lg-block">
             <Row noGutters className="align-items-center">
-              <Col className="text-right d-none d-lg-block">
+              <Col className="text-right">
                 <Search />
               </Col>
               <Col xs="auto">

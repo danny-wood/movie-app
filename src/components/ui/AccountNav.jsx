@@ -19,9 +19,6 @@ function AccountNav() {
 
   return (
     <Row noGutters className="align-items-center">
-      <Col xs="auto" className="ml-2">
-        Hi {user.name}
-      </Col>
       <Col xs="auto mx-2">
         <IconButton onClick={() => history.push("/profile")} title="profile">
           <MdPersonOutline />
@@ -31,6 +28,9 @@ function AccountNav() {
         <IconButton onClick={signout} title="logout">
           <RiLogoutCircleLine />
         </IconButton>
+      </Col>
+      <Col xs="auto" className="ml-2">
+        Hi {user.name}
       </Col>
     </Row>
   );

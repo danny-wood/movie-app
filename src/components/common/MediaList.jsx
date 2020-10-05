@@ -48,10 +48,15 @@ const StyledItem = styled(Link)`
   background: ${vars.grey_200};
   height: 100%;
   min-height: 304px;
+  min-width: 198px;
   display: block;
 
   @media (min-width: ${vars.screen_md_min}) and (max-width: ${vars.screen_md_max}) {
     min-height: 235px;
+  }
+
+  img {
+    min-height: 297px;
   }
 
   span {

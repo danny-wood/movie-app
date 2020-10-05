@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import queryString from "query-string";
+import { useHistory } from "react-router-dom";
 import { tmdbApiUrlV3 } from "../config.json";
 import httpService from "../services/httpService";
 
@@ -26,6 +25,7 @@ function useProvideAuth() {
   const history = useHistory();
   const [user, setUser] = useState(null);
   const [sessionId, setSessionId] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(handleIsAuthenticated);
 
   // Login function, we use TMDB to handle our user account data. When signing in the user is sent on to themoviedb.org,
   // they then login to their account, approve or deny access for their account, then they are redirected back to this app.
@@ -36,13 +36,13 @@ function useProvideAuth() {
   };
 
   const approve = async (requestToken) => {
-    //TODO Move logic for getting query string from approve component to this function
     if (!requestToken) return console.error("No request token");
 
     const data = {
       request_token: requestToken,
     };
     const response = await httpService.post(`${authApiUrl}/session/new`, data);
+    //console.log("Approve Response", response);
     const { success, session_id } = response?.data || {};
 
     if (success) {
@@ -52,10 +52,11 @@ function useProvideAuth() {
       const userResponse = await httpService.get(
         `${accountApiUrl}?session_id=${session_id}`
       );
-      console.log("userResponse", userResponse.data);
+
       setUser(userResponse.data);
       localStorage.setItem("USER", JSON.stringify(userResponse.data));
 
+      setIsAuthenticated(true);
       //TODO handle if user denies access from TMDB account
       history.push("/");
     }
@@ -67,13 +68,14 @@ function useProvideAuth() {
     localStorage.removeItem("SESSION_ID");
     setUser(null);
     setSessionId(null);
+    setIsAuthenticated(false);
     history.push("/");
   };
 
-  // const isAuthenticated = () => {
-  //   const storedUser = localStorage.getItem("USER");
-  //   return storedUser ? true : false;
-  // };
+  function handleIsAuthenticated() {
+    const storedUser = localStorage.getItem("USER");
+    return storedUser ? true : false;
+  }
 
   //   const sendPasswordResetEmail = (email) => {
   //     return firebase
@@ -124,7 +126,7 @@ function useProvideAuth() {
     signin,
     approve,
     signout,
-    //isAuthenticated,
+    isAuthenticated,
     // signup,
     // sendPasswordResetEmail,
     // confirmPasswordReset,
