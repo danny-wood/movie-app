@@ -9,10 +9,15 @@ function Approve() {
   const { approve } = useAuth();
   const location = useLocation();
 
-  useEffect(function () {
-    const qs = queryString.parse(location.search);
-    qs.approved && approve(qs.request_token);
-  }, []);
+  useEffect(
+    function () {
+      const qs = queryString.parse(location?.search);
+      qs.approved && approve(qs.request_token);
+      console.log("qs", qs);
+      console.log("location", location);
+    },
+    [approve, location]
+  );
 
   return (
     <Container>
