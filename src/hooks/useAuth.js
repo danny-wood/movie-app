@@ -32,7 +32,9 @@ function useProvideAuth() {
   const signin = async (username, password) => {
     const tokenResponse = await httpService.get(`${authApiUrl}/token/new`);
     const request_token = tokenResponse?.data?.request_token;
-    window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/approve`;
+    //TODO: Move to env variables
+    //window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/approve`;
+    window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=https://themovie-app.netlify.app/approve`;
   };
 
   const approve = async (requestToken) => {
