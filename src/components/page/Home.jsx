@@ -4,6 +4,8 @@ import MediaList from "../common/MediaList";
 import HeroBanner from "../ui/HeroBanner";
 import { getTrending } from "../../services/trendingService";
 import { getUpcomingMovies } from "../../services/mediaService";
+import { catchError } from "./../../utils/errorUtil";
+import { to } from "./../../utils/httpUtil";
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -12,11 +14,13 @@ const Home = () => {
   const [upcomingMoviesLoading, setUpcomingMoviesLoading] = useState(true);
 
   useEffect(() => {
-    const initTrendingMovies = async () => {
-      const data = await getTrending("movie", "week");
-      setTrendingMovies(data.results.splice(0, 5));
-      setTrendingMoviesLoading(false);
-    };
+    // const initTrendingMovies = async () => {
+    //   await catchError(getTrending("movie", "x"));
+
+    //   const data = await getTrending("movie", "week");
+    //   setTrendingMovies(data.results.splice(0, 5));
+    //   setTrendingMoviesLoading(false);
+    // };
 
     const initUpcomingMovies = async () => {
       const data = await getUpcomingMovies();
@@ -25,8 +29,15 @@ const Home = () => {
     };
 
     initUpcomingMovies();
-    initTrendingMovies();
+    getData();
   }, []);
+
+  async function getData() {
+    const { data, error } = await to(getTrending("movie", "week"));
+    data && setTrendingMovies(data.results.splice(0, 5));
+    error && console.error(error);
+    setTrendingMoviesLoading(false);
+  }
 
   return (
     <>

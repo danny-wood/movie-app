@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { useHistory } from "react-router-dom";
-import { tmdbApiUrlV3 } from "../config.json";
+import { useHistory, useLocation } from "react-router-dom";
+import queryString from "query-string";
+import { tmdbApiUrlV3, tmdbDomain } from "../config.json";
 import httpService from "../services/httpService";
+import { catchError } from "./../utils/errorUtil";
 
 const authApiUrl = `${tmdbApiUrlV3}/authentication`;
 const accountApiUrl = `${tmdbApiUrlV3}/account`;
@@ -22,6 +24,7 @@ export const useAuth = () => {
 
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
+  const location = useLocation();
   const history = useHistory();
   const [user, setUser] = useState(null);
   const [sessionId, setSessionId] = useState(null);
@@ -32,18 +35,21 @@ function useProvideAuth() {
   const signin = async (username, password) => {
     const tokenResponse = await httpService.get(`${authApiUrl}/token/new`);
     const request_token = tokenResponse?.data?.request_token;
-    //TODO: Move to env variables
-    //window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/approve`;
-    window.location.href = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=https://themovie-app.netlify.app/approve`;
+    window.location.href = `${tmdbDomain}/authenticate/${request_token}?redirect_to=${process.env.REACT_APP_DOMAIN}/approve`;
   };
 
-  const approve = async (requestToken) => {
+  const approve = async () => {
+    const qs = queryString.parse(location?.search);
+    const requestToken = qs.request_token;
+
     if (!requestToken) return console.error("No request token");
 
     const data = {
       request_token: requestToken,
     };
-    const response = await httpService.post(`${authApiUrl}/session/new`, data);
+    const response = await catchError(
+      httpService.post(`${authApiUrl}/session/new`, data)
+    );
     //console.log("Approve Response", response);
     const { success, session_id } = response?.data || {};
 
