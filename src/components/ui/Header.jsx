@@ -15,7 +15,7 @@ const Header = () => {
           <Col xs="12" sm="auto" className="text-center">
             <StyledLogo to="/">
               <img
-                src={require("../../assets/svg/movie-app-logo.svg")}
+                src={require("../../assets/svg/movie-app-logo.svg").default}
                 alt="Movie App"
               />
             </StyledLogo>

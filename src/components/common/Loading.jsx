@@ -6,7 +6,7 @@ function Loading(props) {
     <LoadingContainer>
       <img
         alt="Loading..."
-        src={require("../../assets/svg/loading-ellipsis.svg")}
+        src={require("../../assets/svg/loading-ellipsis.svg").default}
         style={{ width: 200 }}
       />
     </LoadingContainer>

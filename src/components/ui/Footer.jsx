@@ -16,7 +16,7 @@ const Footer = () => {
             <Col xs="12" sm="auto">
               <a href="https://www.themoviedb.org">
                 <TMDBLogo
-                  src={require("../../assets/images/tmdb-logo.svg")}
+                  src={require("../../assets/images/tmdb-logo.svg").default}
                   alt="TMDB"
                 />
               </a>
